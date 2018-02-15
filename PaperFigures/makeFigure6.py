@@ -21,10 +21,10 @@ def makeFigure6():
     from WC and WP1 formulations)'''
     
     # Load Pareto sets
-    ieee_synthetic = getFormulations('ieee_synthetic')
-    first_pct_obj = getFormulations('first_pct_obj')
+    WC = getFormulations('WC')
+    WP1 = getFormulations('WP1')
     
-    formulations = [ieee_synthetic, first_pct_obj]
+    formulations = [WC, WP1]
     xlabels = [['Hydro','Deficit$\mathregular{^2}$','Flooding\nDamages'],['Hydro','Deficit$\mathregular{^2}$','Flood','Recovery']]
     titles = ['WC Formulation','WP1 Formulation']
 
