@@ -20,7 +20,7 @@ def getFormulations(name):
         str(np.argmin(formulation.resultfile[:,176])+1) + '_re-eval_1x100000_new.txt')
     formulation.bestDeficit = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
         str(np.argmin(formulation.resultfile[:,177])+1) + '_re-eval_1x100000_new.txt')
-    if name == 'ieee_synthetic':
+    if name == 'WC':
         formulation.bestFlood = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
             str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x100000_new.txt')
         compIndex = findCompromise(formulation.resultfile[:,-3:],1)
@@ -69,26 +69,26 @@ def reshapeMatrices(textfile):
     return [sTOT, hLev]
 
 def plotShadedDensity():
-    '''Makes Figures 9 and 10 from Quinn et al., 2017 - WRR \
-    Figure 9: Time-varying PDFs of water level at Hanoi \
-    Figure 10: Probabilistic state space diagrams of total storage and water level at Hanoi'''
+    '''Makes Figures 7 and 8 from Quinn et al., 2017 - WRR \
+    Figure 7: Time-varying PDFs of water level at Hanoi \
+    Figure 8: Probabilistic state space diagrams of total storage and water level at Hanoi'''
     
     sns.set_style("dark")
     
-    WC = getFormulations('ieee_synthetic')
-    WP1 = getFormulations('first_pct_obj')
+    WC = getFormulations('WC')
+    WP1 = getFormulations('WP1')
     
     WCformulations = [WC.bestFlood, WC.bestHydro, WC.compromise]
     WP1formulations = [WP1.bestFlood, WP1.bestHydro, WP1.compromise]
     
     ylabels = ['WC Formulation', 'WP1 Formulation']
     titles = ['Best Flood Solution','Best Hydro Solution', 'Compromise Solution']
-    makeFigure9(WCformulations, WP1formulations, ylabels, titles, 'Figure9.pdf')
+    makeFigure9(WCformulations, WP1formulations, ylabels, titles, 'Figure7.pdf')
     
     titles = ['WC Compromise Solution', 'WP1 Compromise Solution']
     xlabel = r'$s^{TOT} (km^3\!)$'
     ylabel = r'$z^{HN} (m)$'
-    makeFigure10(WC.compromise, WP1.compromise, xlabel, ylabel, titles, 'Figure10.pdf')
+    makeFigure10(WC.compromise, WP1.compromise, xlabel, ylabel, titles, 'Figure8.pdf')
 
     return None
     
