@@ -6,10 +6,10 @@ class Formulation:
     def __init__(self):
         self.name = None
         self.optim = None
-        self.reeval_new_1000 = None
-        self.reeval_old_50 = None
-        self.reeval_new_100000 = None
-        self.reeval_old_5000 = None
+        self.reeval_1000 = None
+        self.reeval_50 = None
+        self.reeval_100000 = None
+        self.reeval_5000 = None
 
 def makeFigure5():
     '''Makes Figure 5 from Quinn et al., 2017 - WRR (re-evaluation of solutions \
@@ -46,10 +46,10 @@ def getFormulations(name):
     formulation = Formulation()
     formulation.name = name
     formulation.optim = np.loadtxt('./../' + name + '/' + name + '_thinned.csv',delimiter=',',skiprows=1)
-    formulation.reeval_new_1000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_1000.obj')
-    formulation.reeval_old_50 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_50x20.obj')
-    formulation.reeval_new_100000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_100000.obj')
-    formulation.reeval_old_5000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_5000x20.obj')
+    formulation.reeval_1000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_1000.obj')
+    formulation.reeval_50 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_50x20.obj')
+    formulation.reeval_100000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_100000.obj')
+    formulation.reeval_5000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_5000x20.obj')
         
     # replace columns of optimized_new or optimized_old with actual values from optimization, not re-evaluation on same sample size
     if formulation.name != 'ieee_synthetic':    
@@ -60,7 +60,7 @@ def getFormulations(name):
         elif formulation.name == 'exp+hydro_std_obj':
             indices = [4,5,3,6,7]
         
-        formulation.reeval_new_1000[:,indices] = formulation.optim
+        formulation.reeval_1000[:,indices] = formulation.optim
         
     return formulation
     
@@ -82,13 +82,13 @@ def makePlots(formulations, colors, indices, ylabels, titles, precision, names, 
                 if j == 0:
                     if formulations[k].name == 'WC':
                         x = formulations[k].optim[:,indices[j][i]]
-                        y = formulations[k].reeval_old_5000[:,indices[j][i]]
+                        y = formulations[k].reeval_5000[:,indices[j][i]]
                     else:
-                        x = formulations[k].reeval_old_50[:,indices[j][i]]
-                        y = formulations[k].reeval_old_5000[:,indices[j][i]]
+                        x = formulations[k].reeval_50[:,indices[j][i]]
+                        y = formulations[k].reeval_5000[:,indices[j][i]]
                 else:
-                    x = formulations[k].reeval_new_1000[:,indices[j][i]]
-                    y = formulations[k].reeval_new_100000[:,indices[j][i]]                    
+                    x = formulations[k].reeval_1000[:,indices[j][i]]
+                    y = formulations[k].reeval_100000[:,indices[j][i]]                    
                         
                 dot = ax.scatter(x,y,color=colors[k])
                 if i == 0 and j == 0:
