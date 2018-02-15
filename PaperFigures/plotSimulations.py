@@ -1,6 +1,6 @@
 import numpy as np
-from makeFigure6 import makeFigure6
-from makeFigure7 import makeFigure7
+from makeFigureS1 import makeFigureS2
+from makeFigureS2 import makeFigureS2
 import seaborn.apionly as sns
 
 class Formulation:
@@ -59,25 +59,25 @@ def reshapeMatrices(textfile):
     return [sSL, rSL, sHB, rHB, sTQ, rTQ, sTB, rTB]
     
 def plotSimulations():
-    '''Makes Figure 6 and 7 from Quinn et al., 2016 - WRR \
-    Figure 6 = Storage and Release Trajectories at Hoa Binh \
-    Figure 7 = Storage Trajectories at all 4 Reservoirs'''
+    '''Makes Figure S1 and S2 from Quinn et al., 2016 - WRR \
+    Figure S1 = Storage and Release Trajectories at Hoa Binh \
+    Figure S2 = Storage Trajectories at all 4 Reservoirs'''
     
     sns.set_style("dark")
     
-    WC = getFormulations('ieee_synthetic')
-    WP1 = getFormulations('first_pct_obj')
-    EV = getFormulations('exp_obj')
-    EVSDH = getFormulations('exp+hydro_std_obj')
+    WC = getFormulations('WC')
+    WP1 = getFormulations('WP1')
+    EV = getFormulations('EV')
+    EVSDH = getFormulations('EVSDH')
     
     formulations = [WC, WP1, EV, EVSDH]
     colors = ['#1b9e77','#d95f02','#7570b3','#e7298a','#e6ab02']
     ylabels = [r'$s_t^{HB} (km^3\!)$',r'$r_t^{HB} (m^3\!/s)$']
     titles = ['WC Formulation', 'WP1 Formulation', 'EV Formulation', 'EV&SD$\mathregular{_H}$ Formulation']
-    makeFigure6(formulations, colors, ylabels, titles, 'Figure6.pdf')
+    makeFigureS1(formulations, colors, ylabels, titles, 'FigureS1.pdf')
     
     colors = ['#e41a1c','#377eb8','#4daf4a','#984ea3']
     ylabels = [r'$s_t^{SL} (km^3\!)$',r'$s_t^{HB} (km^3\!)$',r'$s_t^{TQ} (km^3\!)$',r'$s_t^{TB} (km^3\!)$']
-    makeFigure7(formulations, colors, ylabels, 'Figure7.pdf')
+    makeFigureS2(formulations, colors, ylabels, 'FigureS2.pdf')
     
     return None
