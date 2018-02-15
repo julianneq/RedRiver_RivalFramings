@@ -11,13 +11,13 @@ def makeFigure4():
     sns.set_style("dark")
     
     # load thinned reference sets from each problem formulation
-    ieee_synthetic = np.loadtxt('./../ieee_synthetic/ieee_synthetic_thinned.csv',delimiter=',',skiprows=1)
-    first_pct_obj = np.loadtxt('./../first_pct_obj/first_pct_obj_thinned.csv',delimiter=',',skiprows=1)
-    exp_obj = np.loadtxt('./../exp_obj/exp_obj_thinned.csv',delimiter=',',skiprows=1)
-    exp_hydroStd_obj = np.loadtxt('./../exp+hydro_std_obj/exp+hydro_std_obj_thinned.csv',delimiter=',',skiprows=1)
+    WC = np.loadtxt('./../WC/WC_thinned.csv',delimiter=',',skiprows=1)
+    WP1 = np.loadtxt('./../WP1/WP1_thinned.csv',delimiter=',',skiprows=1)
+    EV = np.loadtxt('./../EV/EV_thinned.csv',delimiter=',',skiprows=1)
+    EVSDH = np.loadtxt('./../EVSDH/EVSDH_thinned.csv',delimiter=',',skiprows=1)
     
     # set plotting characteristics
-    formulations = [ieee_synthetic, first_pct_obj, exp_obj, exp_hydroStd_obj]
+    formulations = [WC, WP1, EV, EVSDH]
     labels = [['WC Hydro\n(Gwh/day)','WC Deficit$\mathregular{^2}$\n(m$\mathregular{^3}\!$/s)$\mathregular{^2}$','WC Flood\nDamages (-)'],\
         ['WP1 Hydro\n(Gwh/day)','WP1 Deficit$\mathregular{^2}$\n(m$\mathregular{^3}\!$/s)$\mathregular{^2}$','WP1 Flood\n(m above 11.25 m)','WP1 Recovery\n(days)'],\
         ['EV Hydro\n(Gwh/day)','EV Deficit$\mathregular{^2}$\n(m$\mathregular{^3}\!$/s)$\mathregular{^2}$','WP1 Flood\n(m above 11.25 m)','EV Recovery\n(days)'],\
