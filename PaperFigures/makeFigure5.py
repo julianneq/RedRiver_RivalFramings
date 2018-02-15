@@ -19,13 +19,13 @@ def makeFigure5():
     sns.set_style("dark")
     
     # load thinned reference sets from each problem formulation
-    ieee_synthetic = getFormulations('ieee_synthetic')
-    first_pct_obj = getFormulations('first_pct_obj')
-    exp_obj = getFormulations('exp_obj')
-    exp_hydroStd_obj = getFormulations('exp+hydro_std_obj')
+    WC = getFormulations('WC')
+    WP1 = getFormulations('WP1')
+    EV = getFormulations('EV')
+    EVSDH = getFormulations('EVSDH')
     
     # specify plotting parameters
-    formulations = [exp_hydroStd_obj, exp_obj, first_pct_obj, ieee_synthetic]
+    formulations = [EVSDH, EV, WP1, WC]
     colors = ['#984ea3','#4daf4a','#377eb8','#e41a1c']
     indices = [[0,1,2],[0,1,3,2],[4,5,7,6]]
     ylabels = ['WC Objectives','WP1 Objectives','EV&SD$\mathregular{_H}$ Objectives']
@@ -37,12 +37,6 @@ def makeFigure5():
             'WP1 Flood\n(m above 11.25 m)', 'WP1 Recovery (days)'],\
         ['EV Hydro (Gwh/day)', 'EV Deficit$\mathregular{^2}\!$ (m$\mathregular{^3}\!$/s)$\mathregular{^2}$', \
             'EV&SD$\mathregular{_H}$\nHydro Std (Gwh/day)', 'EV Recovery (days)']]
-    #titles = [[r'$J_{Hydro}^{WC}$' + ' (Gwh/day)', r'$J_{Deficit^2}^{WC}$' + ' (m$\mathregular{^3}\!$/s)$\mathregular{^2}$', \
-    #        r'$J_{Flood}^{WC}$' + ' (-)'],\
-    #    [r'$J_{Hydro}^{WP1}$' + ' (Gwh/day)', r'$J_{Deficit^2}^{WP1}$' + ' (m$\mathregular{^3}\!$/s)$\mathregular{^2}$', \
-    #        r'$J_{Flood}^{WP1}$' + ' (m above 11.25 m)', r'$J_{Recovery}^{WP1}$' + ' (days)'],\
-    #    [r'$J_{Hydro}^{EV}$' + ' (Gwh/day)', r'$J_{Deficit^2}^{EV}$' + ' (m$\mathregular{^3}\!$/s)$\mathregular{^2}$', \
-    #        r'$J_{Hydro Std}^{EV&SD_H}$' + ' (Gwh/day)', r'$J_{Recovery}^{EV}$' + ' (days)']]
     
     makePlots(formulations, colors, indices, ylabels, titles, precision, names, 'Figure5.pdf')
     
