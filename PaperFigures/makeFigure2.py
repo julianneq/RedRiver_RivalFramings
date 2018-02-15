@@ -20,7 +20,7 @@ def makeFigure2():
     m.drawcountries(color='k',linewidth=1.25)
     
     # plot Red River basin
-    m.readshapefile('./../../ClimateData/GISVietnam/Vietnam/RedRiverBasin_WGS1984','Basin',drawbounds=False)
+    m.readshapefile('./../GISdata/RedRiverBasin_WGS1984','Basin',drawbounds=False)
     patches = []
     for info, shape in zip(m.Basin_info, m.Basin):
         if info['OBJECTID'] == 1:
@@ -57,7 +57,7 @@ def makeFigure2():
     m2.drawcountries(color='k',linewidth=0.5)
     
     # plot Vietnam green in inset
-    m2.readshapefile('./../../ClimateData/GISVietnam/Vietnam/VN_borders_only_WGS1984','Vietnam',drawbounds=False)
+    m2.readshapefile('./../GISdata/VN_borders_only_WGS1984','Vietnam',drawbounds=False)
     patches2 = []
     for info, shape in zip(m2.Vietnam_info, m2.Vietnam):
         if info['Joiner'] == 1:
