@@ -80,7 +80,7 @@ def makePlots(formulations, colors, indices, ylabels, titles, precision, names, 
             # plot each formulation
             for k in range(len(formulations)):
                 if j == 0:
-                    if formulations[k].name == 'ieee_synthetic':
+                    if formulations[k].name == 'WC':
                         x = formulations[k].optim[:,indices[j][i]]
                         y = formulations[k].reeval_old_5000[:,indices[j][i]]
                     else:
