@@ -51,7 +51,7 @@ def makeFigure6():
     fig.legend([l1,l2,l3],['Best Hydro','Best Flood','Compromise'],loc='lower center',ncol=3,\
         fontsize=16, frameon=True)
     fig.set_size_inches([10.125, 8.3625])
-    fig.savefig('Figure8.pdf')
+    fig.savefig('Figure6.pdf')
     fig.clf()
     
     return None
