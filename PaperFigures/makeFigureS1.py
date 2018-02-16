@@ -70,5 +70,3 @@ def movingAvg(series,window):
         movingAvg[i] = np.sum(newSeries[i:(i+window)]/window)
     
     return movingAvg
-
-makeFigureS1()
