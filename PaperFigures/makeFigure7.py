@@ -82,7 +82,5 @@ def getProbs(data):
         for j in range(np.shape(probMatrix)[1]):
             count = ((data[:,j] < ymax-step*i) & (data[:,j] >= ymax-step*(i+1))).sum()
             probMatrix[i,j] = count/100000.0
-            #if count >= 4: # only calculate probability if at least 4 points in a box, otherwise set to 0
-            #    probMatrix[i,j] = count/100000.0
     
     return probMatrix
