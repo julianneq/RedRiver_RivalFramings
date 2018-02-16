@@ -86,5 +86,3 @@ def getProbs(data):
             #    probMatrix[i,j] = count/100000.0
     
     return probMatrix
-
-makeFigure7()
