@@ -80,12 +80,7 @@ def getProbs(s, h):
             if row < np.shape(probMatrix)[0] and col < np.shape(probMatrix)[1]:
                 probMatrix[row,col] = probMatrix[row,col] + 1
                 
-    # set count to 0 if less than 6 solutions in a box
-    # probMatrix = np.where(probMatrix < 6, 0, probMatrix)
-                
     # calculate probability of being in each box
     probMatrix = probMatrix/(np.shape(s)[0]*np.shape(s)[1])
     
     return probMatrix
-
-makeFigure8()
