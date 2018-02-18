@@ -1,4 +1,3 @@
-from makeFigure1 import makeFigure1
 from makeFigure2 import makeFigure2
 from makeFigure3 import makeFigure3
 from makeFigure4 import makeFigure4
@@ -9,7 +8,6 @@ from plotSimulations import plotSimulations
 
 def makeAllFigures():
   
-  makeFigure1()
   makeFigure2()
   makeFigure3()
   makeFigure4()
