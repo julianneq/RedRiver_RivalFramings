@@ -113,3 +113,5 @@ def parallel_coordinate(ax, table, mins, maxs, cmap, shadeIndex, \
     ax2.spines["right"].set_visible(False)
     
     return ax
+
+makeFigure4()

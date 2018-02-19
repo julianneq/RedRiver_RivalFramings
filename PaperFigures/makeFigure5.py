@@ -52,12 +52,12 @@ def getFormulations(name):
     formulation.reeval_5000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_5000x20.obj')
         
     # replace columns of optimized_new or optimized_old with actual values from optimization, not re-evaluation on same sample size
-    if formulation.name != 'ieee_synthetic':    
-        if formulation.name == 'first_pct_obj':
+    if formulation.name != 'WC':    
+        if formulation.name == 'WP1':
             indices = [0,1,3,2]
-        elif formulation.name == 'exp_obj':
+        elif formulation.name == 'EV':
             indices = [4,5,3,6]
-        elif formulation.name == 'exp+hydro_std_obj':
+        elif formulation.name == 'EVSDH':
             indices = [4,5,3,6,7]
         
         formulation.reeval_1000[:,indices] = formulation.optim
@@ -146,3 +146,5 @@ def makePlots(formulations, colors, indices, ylabels, titles, precision, names, 
     fig.clf()
     
     return None
+
+makeFigure5()

@@ -83,4 +83,6 @@ def makeFigure2():
     fig.savefig('Figure2.pdf')
     fig.clf()
 
-return None
+    return None
+
+makeFigure2()

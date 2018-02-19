@@ -16,22 +16,22 @@ def getFormulations(name):
     formulation = Formulation()
     formulation.name = name
     formulation.resultfile = np.loadtxt('./../' + name + '/' + name + '_thinned.resultfile')
-    formulation.bestHydro = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-        str(np.argmin(formulation.resultfile[:,176])+1) + '_re-eval_1x100000_new.txt')
-    formulation.bestDeficit = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-        str(np.argmin(formulation.resultfile[:,177])+1) + '_re-eval_1x100000_new.txt')
+    formulation.bestHydro = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+        str(np.argmin(formulation.resultfile[:,176])+1) + '_re-eval_1x100000.nc')
+    formulation.bestDeficit = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+        str(np.argmin(formulation.resultfile[:,177])+1) + '_re-eval_1x100000.nc')
     if name == 'WC':
-        formulation.bestFlood = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x100000_new.txt')
+        formulation.bestFlood = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x100000.nc')
         compIndex = findCompromise(formulation.resultfile[:,-3:],1)
-        formulation.compromise = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(compIndex+1) + '_re-eval_1x100000_new.txt')
+        formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(compIndex+1) + '_re-eval_1x100000.nc')
     else:
-        formulation.bestFlood = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
+        formulation.bestFlood = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
             str(np.argmin(formulation.resultfile[:,179])+1) + '_re-eval_1x100000_new.txt')
         compIndex = findCompromise(formulation.resultfile[:,-4:],1)
-        formulation.compromise = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(compIndex+1) + '_re-eval_1x100000_new.txt')
+        formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(compIndex+1) + '_re-eval_1x100000.nc')
         
     return formulation
     
@@ -57,14 +57,10 @@ def findCompromise(refSet, deficitIndex):
     
     return compromise
 
-def reshapeMatrices(textfile):
-    values = np.loadtxt(textfile)
-    values = np.transpose(np.reshape(values,[100000,2*365]))
-    sTOT = np.zeros([100000,365])
-    hLev = np.zeros([100000,365])
-    for i in range(np.shape(hLev)[1]):
-        sTOT[:,i] = values[2*i,:]
-        hLev[:,i] = values[2*i+1,:]
+def loadData(textfile):
+    dataset = Dataset(file)
+    sTOT = dataset.variables['sTOT'][:]
+    hLev = dataset.variables['hLev'][:]
         
     return [sTOT, hLev]
 

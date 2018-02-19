@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import seaborn as sns
+from netCDF4 import Dataset
 
 class Formulation:
     def __init__(self):
@@ -61,54 +62,44 @@ def getFormulations(name):
     formulation.name = name
     formulation.resultfile = np.loadtxt('./../' + name + '/' + name + '_thinned.resultfile')
     formulation.refSet = np.loadtxt('./../' + name + '/' + name + '_thinned.csv',delimiter=',',skiprows=1)
-    formulation.bestHydro = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-        str(np.argmin(formulation.resultfile[:,176])+1) + '_re-eval_1x1000.txt')
-    formulation.bestDeficit = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-        str(np.argmin(formulation.resultfile[:,177])+1) + '_re-eval_1x1000.txt')
-    if name == 'ieee_synthetic':
-        formulation.bestFlood = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x1000.txt')
+    formulation.bestHydro = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+        str(np.argmin(formulation.resultfile[:,176])+1) + '_re-eval_1x1000.nc')
+    formulation.bestDeficit = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+        str(np.argmin(formulation.resultfile[:,177])+1) + '_re-eval_1x1000.nc')
+    if name == 'WC':
+        formulation.bestFlood = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x1000.nc')
         formulation.compIndex = findCompromise(formulation.resultfile[:,-3:],1)
-        formulation.compromise = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(formulation.compIndex+1) + '_re-eval_1x1000.txt')
+        formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(formulation.compIndex+1) + '_re-eval_1x1000.nc')
     else:
-        formulation.bestRecovery = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x1000.txt')
-        formulation.bestFlood = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-            str(np.argmin(formulation.resultfile[:,179])+1) + '_re-eval_1x1000.txt')
-        if name != 'exp+hydro_std_obj':
+        formulation.bestRecovery = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(np.argmin(formulation.resultfile[:,178])+1) + '_re-eval_1x1000.nc')
+        formulation.bestFlood = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+            str(np.argmin(formulation.resultfile[:,179])+1) + '_re-eval_1x1000.nc')
+        if name != 'EVSDH':
             formulation.compIndex = findCompromise(formulation.resultfile[:,-4:],1)
-            formulation.compromise = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-                str(formulation.compIndex+1) + '_re-eval_1x1000.txt')
+            formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+                str(formulation.compIndex+1) + '_re-eval_1x1000.nc')
         else:
-            formulation.bestStd = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-                str(np.argmin(formulation.resultfile[:,180])+1) + '_re-eval_1x1000.txt')
+            formulation.bestStd = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+                str(np.argmin(formulation.resultfile[:,180])+1) + '_re-eval_1x1000.nc')
             formulation.compIndex = findCompromise(formulation.resultfile[:,-5:],1)
-            formulation.compromise = reshapeMatrices('./../' + name + '/simulations/' + name + '_thinned_proc' + \
-                str(formulation.compIndex+1) + '_re-eval_1x1000.txt')
+            formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
+                str(formulation.compIndex+1) + '_re-eval_1x1000.nc')
         
     return formulation
 
-def reshapeMatrices(textfile):
-    values = np.loadtxt(textfile)
-    values = np.transpose(np.reshape(values,[1000,8*365]))
-    sSL = np.zeros([1000,365])
-    rSL = np.zeros([1000,365])
-    sHB = np.zeros([1000,365])
-    rHB = np.zeros([1000,365])
-    sTQ = np.zeros([1000,365])
-    rTQ = np.zeros([1000,365])
-    sTB = np.zeros([1000,365])
-    rTB = np.zeros([1000,365])
-    for i in range(np.shape(sSL)[1]):
-        sSL[:,i] = values[8*i,:]
-        rSL[:,i] = values[8*i+1,:]
-        sHB[:,i] = values[8*i+2,:]
-        rHB[:,i] = values[8*i+3,:]
-        sTQ[:,i] = values[8*i+4,:]
-        rTQ[:,i] = values[8*i+5,:]
-        sTB[:,i] = values[8*i+6,:]
-        rTB[:,i] = values[8*i+7,:]
+def loadData(file):
+    dataset = Dataset(file)
+    sSL = dataset.variables['sSL'][:]
+    rSL = dataset.variables['rSL'][:]
+    sHB = dataset.variables['sHB'][:]
+    rHB = dataset.variables['rHB'][:]
+    sTQ = dataset.variables['sTQ'][:]
+    rTQ = dataset.variables['rTQ'][:]
+    sTB = dataset.variables['sTB'][:]
+    rTB = dataset.variables['rTB'][:]
         
     return [sSL, rSL, sHB, rHB, sTQ, rTQ, sTB, rTB]
     

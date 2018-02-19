@@ -41,3 +41,5 @@ def makeFigure3():
     fig.clf()
     
     return None
+
+makeFigure3()
