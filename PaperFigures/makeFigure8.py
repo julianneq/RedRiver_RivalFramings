@@ -75,8 +75,8 @@ def getProbs(s, h):
     for i in range(np.shape(s)[0]):
         for j in range(np.shape(s)[1]):
             # figure out which "box" the simulated s and h are in
-            row = np.floor((ymax-h[i,j])/yStep)
-            col = np.ceil((s[i,j]-xmin)/xStep)
+            row = int(np.floor((ymax-h[i,j])/yStep))
+            col = int(np.ceil((s[i,j]-xmin)/xStep))
             if row < np.shape(probMatrix)[0] and col < np.shape(probMatrix)[1]:
                 probMatrix[row,col] = probMatrix[row,col] + 1
                 
