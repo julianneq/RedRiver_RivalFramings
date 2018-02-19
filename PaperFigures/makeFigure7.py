@@ -17,10 +17,10 @@ def makeFigure7(WCformulations, WP1formulations, ylabels, titles, filename):
     WCprob = []
     WP1prob = []
     for j in range(len(WCformulations)):
-        WCsoln_i = np.log10(getProbs(WCformulations[j][1]))
-        WP1soln_i = np.log10(getProbs(WP1formulations[j][1]))
-        a = WCsoln_i[WCsoln_i > -np.inf]
-        b = WP1soln_i[WP1soln_i > -np.inf]
+        WCsoln_j = np.log10(getProbs(WCformulations[j][1]))
+        WP1soln_j = np.log10(getProbs(WP1formulations[j][1]))
+        a = WCsoln_j[WCsoln_j > -np.inf]
+        b = WP1soln_j[WP1soln_j > -np.inf]
         if j == 0:
             tickMin = min(np.min(a), np.min(b))
             tickMax = min(np.max(a), np.max(b))
@@ -28,8 +28,8 @@ def makeFigure7(WCformulations, WP1formulations, ylabels, titles, filename):
             tickMin = min(np.min(tickMin), min(np.min(a), np.min(b)))
             tickMax = max(np.max(tickMax), max(np.max(a), np.max(b)))
             
-        WCprob.append(WCsoln_i)
-        WP1prob.append(WP1soln_i)
+        WCprob.append(WCsoln_j)
+        WP1prob.append(WP1soln_j)
     
     fig = plt.figure()
     for i in range(nrows):
