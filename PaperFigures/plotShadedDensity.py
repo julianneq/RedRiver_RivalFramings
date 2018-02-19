@@ -1,6 +1,7 @@
 import numpy as np
 from makeFigure7 import makeFigure7
 from makeFigure8 import makeFigure8
+from netCDF4 import Dataset
 import seaborn.apionly as sns
 
 class Formulation:
@@ -57,7 +58,7 @@ def findCompromise(refSet, deficitIndex):
     
     return compromise
 
-def loadData(textfile):
+def loadData(file):
     dataset = Dataset(file)
     sTOT = dataset.variables['sTOT'][:]
     hLev = dataset.variables['hLev'][:]
