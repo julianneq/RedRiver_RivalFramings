@@ -29,7 +29,7 @@ def getFormulations(name):
             str(compIndex+1) + '_re-eval_1x100000.nc')
     else:
         formulation.bestFlood = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
-            str(np.argmin(formulation.resultfile[:,179])+1) + '_re-eval_1x100000_new.txt')
+            str(np.argmin(formulation.resultfile[:,179])+1) + '_re-eval_1x100000.nc')
         compIndex = findCompromise(formulation.resultfile[:,-4:],1)
         formulation.compromise = loadData('./../' + name + '/simulations/' + name + '_thinned_soln' + \
             str(compIndex+1) + '_re-eval_1x100000.nc')
