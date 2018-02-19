@@ -1,6 +1,6 @@
 import numpy as np
-from makeFigure9 import makeFigure9
-from makeFigure10 import makeFigure10
+from makeFigure7 import makeFigure7
+from makeFigure8 import makeFigure8
 import seaborn.apionly as sns
 
 class Formulation:
@@ -79,12 +79,12 @@ def plotShadedDensity():
     
     ylabels = ['WC Formulation', 'WP1 Formulation']
     titles = ['Best Flood Solution','Best Hydro Solution', 'Compromise Solution']
-    makeFigure9(WCformulations, WP1formulations, ylabels, titles, 'Figure7.pdf')
+    makeFigure7(WCformulations, WP1formulations, ylabels, titles, 'Figure7.pdf')
     
     titles = ['WC Compromise Solution', 'WP1 Compromise Solution']
     xlabel = r'$s^{TOT} (km^3\!)$'
     ylabel = r'$z^{HN} (m)$'
-    makeFigure10(WC.compromise, WP1.compromise, xlabel, ylabel, titles, 'Figure8.pdf')
+    makeFigure8(WC.compromise, WP1.compromise, xlabel, ylabel, titles, 'Figure8.pdf')
 
     return None
     
