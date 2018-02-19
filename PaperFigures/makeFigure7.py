@@ -60,7 +60,7 @@ def makeFigure7(WCformulations, WP1formulations, ylabels, titles, filename):
             dikeHeight, = ax.plot([0,365],[(1-13.4/15.0)*365.0,(1-13.4/15.0)*365.0],linewidth=2,c='k') # dike height
         
     fig.subplots_adjust(right=0.8,bottom=0.2)
-    fig.text(0.04, 0.5, r'$z_{HN} (m)$', va='center', rotation='vertical',fontsize=18)
+    fig.text(0.04, 0.5, r'$z^{HN} (m)$', va='center', rotation='vertical',fontsize=18)
     fig.legend([alarm1, alarm2, dikeHeight],['First Alarm', 'Second Alarm', 'Dike Height'], \
         loc='lower center', ncol=3, frameon=True)
     cbar_ax = fig.add_axes([0.85, 0.15, 0.05, 0.7])
