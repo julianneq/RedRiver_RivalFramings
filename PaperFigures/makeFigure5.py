@@ -51,7 +51,7 @@ def getFormulations(name):
     formulation.reeval_100000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_100000.obj')
     formulation.reeval_5000 = np.loadtxt('./../' + name + '/' + name + '_thinned_re-eval_5000x20.obj')
         
-    # replace columns of optimized_new or optimized_old with actual values from optimization, not re-evaluation on same sample size
+    # replace columns of optim with actual values from optimization, not re-evaluation on same sample size
     if formulation.name != 'WC':    
         if formulation.name == 'WP1':
             indices = [0,1,3,2]
