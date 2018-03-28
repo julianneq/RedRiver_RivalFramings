@@ -17,8 +17,8 @@ def makeFigure7(WCformulations, WP1formulations, ylabels, titles, filename):
     WCprob = []
     WP1prob = []
     for j in range(len(WCformulations)):
-        WCsoln_j = np.log10(getProbs(WCformulations[j][1]))
-        WP1soln_j = np.log10(getProbs(WP1formulations[j][1]))
+        WCsoln_j = np.log10(getProbs(WCformulations[j][1], ymax, ymin))
+        WP1soln_j = np.log10(getProbs(WP1formulations[j][1], ymax, ymin))
         a = WCsoln_j[WCsoln_j > -np.inf]
         b = WP1soln_j[WP1soln_j > -np.inf]
         if j == 0:
@@ -73,10 +73,8 @@ def makeFigure7(WCformulations, WP1formulations, ylabels, titles, filename):
 
     return None
     
-def getProbs(data):
+def getProbs(data, ymax, ymin):
     probMatrix = np.zeros([366,365])
-    ymax = 15.0
-    ymin = 0.0
     step = (ymax-ymin)/366.0
     for i in range(np.shape(probMatrix)[0]):
         for j in range(np.shape(probMatrix)[1]):
