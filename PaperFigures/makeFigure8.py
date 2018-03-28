@@ -15,8 +15,8 @@ def makeFigure8(WCcomp, WP1comp, xlabel, ylabel, titles, filename):
     
     # create matrix of probabilities
     # dimensions are 100 rows x 100 columns (rows span 0-15 m depth at Hanoi, columns span total storages)
-    WCprob = getProbs(WCcomp[0],WCcomp[1])
-    WP1prob = getProbs(WP1comp[0],WP1comp[1])
+    WCprob = getProbs(WCcomp[0],WCcomp[1], ymax, ymin)
+    WP1prob = getProbs(WP1comp[0],WP1comp[1], ymax, ymin)
     
     # convert to log scale and find range for colorbar tick marks
     WCprob = np.log10(WCprob)
@@ -64,10 +64,8 @@ def makeFigure8(WCcomp, WP1comp, xlabel, ylabel, titles, filename):
 
     return None
     
-def getProbs(s, h):
+def getProbs(s, h, ymax, ymin):
     probMatrix = np.zeros([100,100])
-    ymax = 15.0
-    ymin = 0.0
     xmax = 3E10
     xmin = 0.5E10
     yStep = (ymax-ymin)/np.shape(probMatrix)[0]
