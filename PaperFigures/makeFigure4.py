@@ -85,6 +85,8 @@ def parallel_coordinate(ax, table, mins, maxs, cmap, shadeIndex, \
     
     ax.set_title(title,fontsize=16,y=1.1)
     ax.set_xticks(np.arange(0,np.shape(table)[1],1))
+    ax.set_xlim([0,np.shape(table)[1]-1])
+    ax.set_ylim([0,1])
     ax.set_xticklabels(xlabels,fontsize=14)
     ax.tick_params(axis='y',which='both',labelleft='off',left='off',right='off')
     ax.tick_params(axis='x',which='both',top='off',bottom='off')
@@ -102,6 +104,8 @@ def parallel_coordinate(ax, table, mins, maxs, cmap, shadeIndex, \
     # create twin y axis to put x tick labels on top
     ax2 = ax.twiny()
     ax2.set_xticks(np.arange(0,np.shape(table)[1],1))
+    ax2.set_xlim([0,np.shape(table)[1]-1])
+    ax2.set_ylim([0,1])
     ax2.set_xticklabels(toplabels,fontsize=14)
     ax2.tick_params(axis='y',which='both',labelleft='off',left='off',right='off')
     ax2.tick_params(axis='x',which='both',top='off',bottom='off')
