@@ -2,6 +2,7 @@ import numpy as np
 from makeFigureS1 import makeFigureS1
 from makeFigureS2 import makeFigureS2
 import seaborn.apionly as sns
+from netCDF4 import Dataset
 
 class Formulation:
     def __init__(self):
